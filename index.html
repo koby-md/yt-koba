@@ -2,57 +2,30 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>أداة معالجة رابط Instagram</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; text-align: right; }
-        input[type="text"] { width: 80%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; }
-        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
-        pre { background-color: #f4f4f4; padding: 15px; border: 1px solid #ddd; overflow-x: auto; text-align: left; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البحث عن فيديو يوتيوب (نتيجة واحدة)</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <h1>إرسال رابط المعالجة</h1>
-    <input type="text" id="linkInput" placeholder="الصق رابط Instagram هنا...">
-    <button onclick="sendLink()">إرسال الرابط</button>
+    <div class="container">
+        <header>
+            <i class="fab fa-youtube logo-icon"></i>
+            <h1>باحث يوتيوب الأنيق</h1>
+        </header>
 
-    <h2>النتيجة (JSON):</h2>
-    <pre id="resultOutput">سيتم عرض نتيجة الـ JSON هنا...</pre>
+        <section class="search-section">
+            <input type="text" id="search-query" placeholder="أدخل اسم الفيديو للبحث...">
+            <button id="search-button">
+                <i class="fas fa-search"></i> بحث
+            </button>
+        </section>
 
-    <script>
-        // const: دالة ثابتة للتعامل مع النقر على الزر
-        const sendLink = async () => {
-            // const: الحصول على قيمة الإدخال الثابتة
-            const linkInput = document.getElementById('linkInput');
-            const link = linkInput.value.trim();
-            const outputElement = document.getElementById('resultOutput');
-            outputElement.textContent = 'جاري الإرسال والمعالجة...';
-
-            if (!link) {
-                outputElement.textContent = 'الرجاء إدخال رابط صالح.';
-                return;
-            }
-
-            try {
-                // const: إعدادات الطلب ثابتة
-                const response = await fetch('http://localhost:3000/process', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ link: link })
-                });
-
-                // const: النتيجة المستلمة ثابتة
-                const result = await response.json();
-                
-                // عرض النتيجة بتنسيق JSON مقروء
-                outputElement.textContent = JSON.stringify(result, null, 2);
-
-            } catch (error) {
-                outputElement.textContent = `حدث خطأ في الاتصال بالخادم: ${error.message}. تأكد من أن الخادم (app.js) يعمل.`;
-                console.error('Fetch error:', error);
-            }
-        };
-    </script>
+        <section id="results-container" class="single-result-view">
+            <p class="initial-message">أدخل عنوان الفيديو أعلاه للعثور عليه بسرعة! 🚀</p>
+        </section>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
