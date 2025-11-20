@@ -1,0 +1,25 @@
+{
+  "name": "yt-koba",
+  "version": "1.0.0",
+  "description": "YT-Koba: مكتبة بسيطة للتعامل مع ملفات JS/HTML/CSS.",
+  "main": "script.js",
+  "type": "module",
+  "files": [
+    "script.js",
+    "style.css"
+  ],
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/koby-md/yt-koba.git"
+  },
+  "keywords": [
+    "yt-koba",
+    "javascript",
+    "library"
+  ],
+  "author": "koby-md",
+  "license": "MIT"
+}
