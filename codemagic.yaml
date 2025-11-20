@@ -1,0 +1,23 @@
+workflows:
+  deploy:
+    name: Deploy Workflow
+    triggering:
+      events:
+        - push
+        - pull_request
+      branch_patterns:
+        - pattern: master
+          include: true
+
+    environment:
+      node: "20"
+
+    scripts:
+      - name: Install Dependencies
+        script: npm install
+
+      - name: Start Project
+        script: npm start
+
+    artifacts:
+      - "**/*.log"
