@@ -1,0 +1,245 @@
+:root {
+    --primary-red: #ff0000;
+    --dark-red: #cc0000;
+    --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* ظل أعمق وأكثر وضوحًا */
+    --hover-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    --border-radius-main: 18px;
+    --border-radius-card: 14px;
+}
+
+body {
+    font-family: 'Cairo', sans-serif; /* استخدام خط كايرو */
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); /* تدرج لوني براق */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* توسيط عمودي */
+    min-height: 100vh; /* لتغطية كامل الشاشة */
+    padding: 30px 15px;
+    margin: 0;
+    text-align: right;
+    overflow-x: hidden; /* لمنع ظهور شريط التمرير الأفقي */
+}
+
+.container {
+    background: #ffffffd0; /* خلفية شبه شفافة لتحسين الرؤية */
+    backdrop-filter: blur(10px); /* تأثير ضبابي على الخلفية */
+    padding: 35px;
+    border-radius: var(--border-radius-main);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25); /* ظل أعمق للكونتينر */
+    width: 100%;
+    max-width: 750px; /* عرض أكبر قليلاً لراحة العين */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* حدود شفافة */
+    animation: fadeIn 0.8s ease-out; /* تأثير ظهور لطيف */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- الهيدر (Header) --- */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 35px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid rgba(255, 0, 0, 0.2); /* خط أحمر خفيف */
+}
+
+.logo-icon {
+    font-size: 42px; /* حجم أكبر للأيقونة */
+    color: var(--primary-red);
+    margin-left: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* ظل للأيقونة */
+}
+
+h1 {
+    font-size: 2.2em;
+    color: var(--primary-red);
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* --- قسم البحث (Search Section) --- */
+.search-section {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 50px;
+}
+
+#search-query {
+    flex-grow: 1;
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 18px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    text-align: right;
+    background-color: #fcfcfc;
+}
+
+#search-query:focus {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
+    outline: none;
+}
+
+#search-button {
+    background: linear-gradient(45deg, #ff416c 0%, #ff4b2b 100%); /* تدرج لوني أروع للزر */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+}
+
+#search-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(255, 75, 43, 0.6);
+}
+
+#search-button i {
+    font-size: 1.1em;
+}
+
+/* --- منطقة عرض النتيجة الواحدة (Single Result View) --- */
+.single-result-view {
+    padding-top: 20px;
+}
+
+.initial-message,
+.loading-message {
+    text-align: center;
+    color: #666;
+    font-size: 1.2em;
+    padding: 40px 0;
+    font-weight: 600;
+}
+
+.loading-message {
+    color: var(--dark-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.loading-message .fa-spinner {
+    font-size: 1.5em;
+    color: var(--primary-red);
+}
+
+
+/* --- بطاقة النتيجة (Result Card) --- */
+.result-card {
+    background: #fff;
+    border-radius: var(--border-radius-card);
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column; /* لتغيير الترتيب في الشاشات الصغيرة */
+    overflow: hidden; /* لإخفاء أي جزء زائد من الصورة */
+    transition: box-shadow 0.3s, transform 0.3s;
+    border: 1px solid #eee;
+}
+
+.result-card:hover {
+    box-shadow: var(--hover-shadow);
+    transform: translateY(-8px);
+}
+
+.thumbnail-container {
+    width: 100%;
+    max-height: 250px; /* ارتفاع ثابت للصور المصغرة */
+    overflow: hidden;
+    position: relative;
+    background-color: #f0f0f0; /* لون احتياطي */
+}
+
+.thumbnail-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* لملء المساحة دون تشويه */
+    display: block;
+    transition: transform 0.3s ease-in-out;
+}
+
+.result-card:hover .thumbnail-container img {
+    transform: scale(1.05); /* تكبير الصورة عند التحويم */
+}
+
+.card-content {
+    padding: 20px;
+    text-align: right;
+}
+
+.card-content h3 {
+    font-size: 1.4em;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 12px;
+    line-height: 1.5;
+    font-weight: 700;
+}
+
+.card-content a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1.05em;
+    margin-bottom: 12px;
+    display: inline-block; /* لتحديد الهوامش */
+    transition: color 0.3s;
+}
+
+.card-content a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.card-content .duration {
+    font-size: 1em;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #eee; /* خط منقط فاصل */
+}
+
+.card-content .duration i {
+    color: var(--primary-red);
+    font-size: 1.1em;
+}
+
+/* --- التجاوبية (Responsive Design) --- */
+@media (min-width: 600px) {
+    .result-card {
+        flex-direction: row; /* عرض أفقي في الشاشات الكبيرة */
+    }
+    .thumbnail-container {
+        width: 40%; /* الصورة تأخذ 40% من العرض */
+        max-height: none; /* إزالة الارتفاع الثابت */
+    }
+    .card-content {
+        flex-grow: 1; /* المحتوى يأخذ المساحة المتبقية */
+        padding: 25px;
+    }
+}
+
+@media (max-width: 599px) {
+    h1 { font-size: 1.8em; }
+    .logo-icon { font-size: 36px; }
+    .search-section { flex-direction: column; }
+    #search-button { width: 100%; }
+    .card-content h3 { font-size: 1.2em; }
+}
